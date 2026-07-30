@@ -1,0 +1,11 @@
+# Telegram bot framework (async) + built-in JobQueue for reminders.
+python-telegram-bot[job-queue]==21.9
+
+# Official Anthropic SDK — powers task extraction, autonomous execution and focus.
+anthropic>=0.69
+
+# Loads a local .env file so you don't have to export variables by hand.
+python-dotenv>=1.0
+
+# Timezone database (needed for zoneinfo on some platforms, e.g. Windows).
+tzdata>=2024.1
