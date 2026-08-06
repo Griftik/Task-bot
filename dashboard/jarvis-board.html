@@ -1,0 +1,159 @@
+<title>Джарвис — задачи по проектам</title>
+<style>
+  :root{
+    --bg:#F2F4F6; --card:#FFFFFF; --ink:#212933; --muted:#5C6B7A;
+    --line:#DCE3E9; --accent:#B96417; --accent-soft:#F6E8D8;
+    --ok:#2F7D4F; --ok-soft:#E2F0E7; --warn:#8F6512; --warn-soft:#F7EDD3;
+    --block:#B3392E; --block-soft:#F9E4E1;
+    --mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
+    --serif:Georgia,"Times New Roman",serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#12161B; --card:#1A2027; --ink:#E6EBF0; --muted:#93A1AF;
+      --line:#2A333D; --accent:#E08A3C; --accent-soft:#33261A;
+      --ok:#5BB37F; --ok-soft:#1C2E23; --warn:#D9A44A; --warn-soft:#332A17;
+      --block:#E06456; --block-soft:#39201D;
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#F2F4F6; --card:#FFFFFF; --ink:#212933; --muted:#5C6B7A;
+    --line:#DCE3E9; --accent:#B96417; --accent-soft:#F6E8D8;
+    --ok:#2F7D4F; --ok-soft:#E2F0E7; --warn:#8F6512; --warn-soft:#F7EDD3;
+    --block:#B3392E; --block-soft:#F9E4E1;
+  }
+  :root[data-theme="dark"]{
+    --bg:#12161B; --card:#1A2027; --ink:#E6EBF0; --muted:#93A1AF;
+    --line:#2A333D; --accent:#E08A3C; --accent-soft:#33261A;
+    --ok:#5BB37F; --ok-soft:#1C2E23; --warn:#D9A44A; --warn-soft:#332A17;
+    --block:#E06456; --block-soft:#39201D;
+  }
+  body{background:var(--bg);color:var(--ink);
+    font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    margin:0;padding:28px 20px 64px;}
+  .wrap{max-width:960px;margin:0 auto;display:flex;flex-direction:column;gap:28px;}
+
+  header .eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;}
+  header h1{font-family:var(--serif);font-size:30px;line-height:1.15;margin:6px 0 4px;text-wrap:balance;}
+  header .sub{color:var(--muted);font-size:13.5px;}
+  header .sub b{color:var(--ink);font-weight:600;}
+  .date{font-family:var(--mono);font-size:13px;color:var(--muted);}
+
+  .you{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+  .you h2{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--block);
+    margin:0;padding:12px 18px 10px;border-bottom:1px solid var(--line);}
+  .you ul{list-style:none;margin:0;padding:0;}
+  .you li{display:flex;gap:12px;align-items:baseline;padding:11px 18px;border-bottom:1px solid var(--line);}
+  .you li:last-child{border-bottom:none;}
+  .you .proj{font-family:var(--mono);font-size:11.5px;color:var(--muted);white-space:nowrap;}
+  .you .act b{font-weight:600;}
+  .you .why{color:var(--muted);font-size:13px;}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 18px 14px;
+    display:flex;flex-direction:column;gap:12px;}
+  .card h3{font-family:var(--serif);font-size:18.5px;margin:0;line-height:1.2;}
+  .card .head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;}
+  .state{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;white-space:nowrap;}
+  .state.on{color:var(--ok);} .state.hold{color:var(--muted);}
+  .stop{font-size:13.5px;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:10px;margin:0;}
+  .stop b{color:var(--ink);font-weight:600;}
+
+  .tasks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px;}
+  .tasks li{display:flex;gap:9px;align-items:baseline;font-size:14px;}
+  .chip{font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;
+    padding:2px 7px;border-radius:99px;white-space:nowrap;flex-shrink:0;position:relative;top:-1px;}
+  .chip.claude{background:var(--accent-soft);color:var(--accent);}
+  .chip.me{background:transparent;color:var(--muted);box-shadow:inset 0 0 0 1px var(--line);}
+  .chip.block{background:var(--block-soft);color:var(--block);}
+  .st{font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap;}
+  .st.run{color:var(--ok);} .st.wait{color:var(--warn);}
+  li.done{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line);}
+
+  footer{color:var(--muted);font-size:12.5px;text-align:center;}
+  footer code{font-family:var(--mono);font-size:11.5px;}
+  @media (max-width:640px){ .you li{flex-wrap:wrap;} }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Джарвис · сводка</div>
+    <h1>Задачи по проектам</h1>
+    <div class="sub"><span class="date">чт · 6 августа 2026</span> &nbsp;·&nbsp; статусы собраны автоматически · обновляется каждое утро в <b>08:00 МСК</b></div>
+  </header>
+
+  <section class="you">
+    <h2>Ждут только тебя — 3</h2>
+    <ul>
+      <li><span class="proj">новая экономика</span><span class="act"><b>Выгрузить зип карточек онтологии</b> на Диск <span class="why">— правки уже трёх слоёв копятся мимо канона</span></span></li>
+      <li><span class="proj">контент-завод</span><span class="act"><b>Сменить токен бота у @BotFather</b> <span class="why">— токен открыт в файлах на Диске; после смены пришли новый мне в ENV</span></span></li>
+      <li><span class="proj">mirra</span><span class="act"><b>Армянская ID-карта с чипом — есть?</b> <span class="why">— развилка юрсхемы: «онлайн за минуты» или «доверенность $600»</span></span></li>
+    </ul>
+  </section>
+
+  <section class="grid">
+    <article class="card">
+      <div class="head"><h3>Новая экономика</h3><span class="state on">активен</span></div>
+      <p class="stop">Верифицированы <b>слои 5 и 3 из 7</b> (слой 3: 6 подтв · 2 скорр · 0 опроверг; «Рынок» перев→расщ, Synergy-63% → Ф✓). Счётчики: 3 · 13 · 27 · 4 · 3</p>
+      <ul class="tasks">
+        <li class="done"><span class="chip claude">клод</span>Слой 5 «Управление» — верифицирован (04.08)</li>
+        <li class="done"><span class="chip claude">клод</span>Слой 3 «Отношения» — верифицирован (05.08)</li>
+        <li><span class="chip claude">клод</span>Слой 2 «Субъекты» — Труд, Фирма, ИИ-агент…<span class="st run">в работе</span></li>
+        <li><span class="chip claude">клод</span>Слайды 7–15 под 5 кругов<span class="st wait">ждёт файл</span></li>
+        <li><span class="chip me">ты</span>Выгрузить зип карточек канона на Диск</li>
+        <li><span class="chip me">ты</span>Прислать файл презентации «Лаборатория»</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <div class="head"><h3>Дневник состояния · Mirra</h3><span class="state on">активен</span></div>
+      <p class="stop">Док №16 (teardown 10 конкурентов) → <b>бэклог приоритизирован</b>; по коду сверено: капсулы, сад, уровни связи, мягкая серия — уже реализованы</p>
+      <ul class="tasks">
+        <li class="done"><span class="chip claude">клод</span>Приоритизация 🔥-бэклога: ТОП-5 до пилота готов</li>
+        <li class="done"><span class="chip claude">клод</span>Сверка «план vs факт» по коду diary-bot</li>
+        <li><span class="chip claude">клод</span>Реализация ТОП-5: SOS-маршрут, PIN, онбординг-награда…<span class="st wait">ждёт «го»</span></li>
+        <li><span class="chip claude">клод</span>Синк доков vault ↔ repo (в vault нет 17–20)<span class="st">в очереди</span></li>
+        <li><span class="chip me">ты</span>Ответ про армянскую ID-карту</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <div class="head"><h3>Контент-завод</h3><span class="state on">активен</span></div>
+      <p class="stop">Три версии кода бота @neurostrategy, <b>секреты в файлах</b> — без движения 3-й день</p>
+      <ul class="tasks">
+        <li><span class="chip block">блокер</span>Токен бота открыт на Диске — нужна ротация<span class="st wait">ждёт тебя</span></li>
+        <li><span class="chip claude">клод</span>Один git-репозиторий + ENV-конфиг вместо трёх версий<span class="st">в очереди</span></li>
+        <li><span class="chip me">ты</span>Какая версия сейчас на Railway?</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <div class="head"><h3>Джарвис</h3><span class="state on">активен</span></div>
+      <p class="stop">Протокол v2 работает: <b>вторая автосводка подряд</b>; в Обсидиане — дашборд и canvas-карта; исходник этого дашборда переехал в git</p>
+      <ul class="tasks">
+        <li class="done"><span class="chip claude">клод</span>Мозг + протокол + утренний ритм 08:00</li>
+        <li class="done"><span class="chip claude">клод</span>Обсидиан-дашборд + canvas-карта</li>
+        <li class="done"><span class="chip claude">клод</span>Автосводки 05.08 и 06.08</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <div class="head"><h3>Идентичность</h3><span class="state hold">пауза</span></div>
+      <p class="stop">Материал в «Личное» (ценности, достижения, рефлексии). Приватная дорожка — подключаю по твоему слову</p>
+      <ul class="tasks">
+        <li><span class="chip me">ты</span>Скажи, когда и в каком формате заходить (рефлексия? разбор раз в неделю?)</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <div class="head"><h3>Личное и покупки</h3><span class="state hold">ждёт захвата</span></div>
+      <p class="stop">Упомянуты, деталей нет — наговори, зафиксирую с датами</p>
+      <ul class="tasks">
+        <li><span class="chip me">ты</span>Ноутбук — купить или забрать? какой, когда?</li>
+        <li><span class="chip me">ты</span>Билеты — куда, на какие даты?</li>
+      </ul>
+    </article>
+  </section>
+
+  <footer>Источник правды — vault <code>Рабочая зона (Claude)</code> · снимки в <code>Статусы/</code> · протокол: <code>_Протокол Джарвиса v2</code> · исходник: <code>Task-bot/dashboard/</code></footer>
+</div>
