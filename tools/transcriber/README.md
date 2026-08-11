@@ -1,33 +1,53 @@
-# Расшифровщик встреч и диктофона
+# Transcriber — агент расшифровки (модуль + адаптеры)
 
-Telegram-бот на твоём VPS: кидаешь голосовое/аудио/видео — получаешь `.md`-расшифровку
-с таймкодами. Копия падает в `transcripts/` и (опционально) пушится в git — оттуда
-ИИ-помощник забирает контекст: саммари, задачи, привязку к проектам.
+Переиспользуемый агент расшифровки встреч и диктофона (класс Plaud:
+whisper **large-v3** + LLM-пост-обработка при заборе).
 
-Качество класса Plaud = whisper **large-v3** на сервере + LLM-пост-обработка при заборе.
-
-## Деплой (на VPS, где крутится Miru — там уже есть ffmpeg)
-
-```bash
-# 1. Код
-git clone <task-bot-repo> && cd Task-bot/tools/transcriber
-
-# 2. Зависимости (модель large-v3 скачается при первом старте, ~3 ГБ)
-pip install faster-whisper pyTelegramBotAPI
-
-# 3. Новый бот: @BotFather → /newbot → токен (старый скомпрометирован — не переиспользовать!)
-
-# 4. Запуск
-BOT_TOKEN=xxx ALLOWED_USER_ID=291136301 WHISPER_MODEL=large-v3 GIT_PUSH=1 \
-  nohup python3 bot.py > transcriber.log 2>&1 &
+```
+transcriber/           ← ЯДРО-АГЕНТ: чистый модуль, только faster-whisper + ffmpeg
+  core.py                TranscriberAgent.transcribe(file) → Transcript
+adapters/              ← тонкие обёртки вокруг ядра
+  telegram_bot.py        Telegram: кинул файл → получил .md (до 20 МБ)
+  watch_folder.py        папка на сервере: для длинных Zoom-записей
+  cli.py                 python -m adapters.cli запись.m4a
 ```
 
-Если CPU сервера слаб для large-v3 (расшифровка дольше ×3 от длительности записи) —
-поставить `WHISPER_MODEL=medium`: качество чуть ниже, скорость ×2–3.
+## Как модуль (для «Помощника управленца» и любых продуктов)
 
-## Ограничения и развитие
-- Telegram Bot API отдаёт ботам файлы **до 20 МБ** (~20–40 мин диктофона в m4a/ogg).
-  Zoom-записи длиннее — v2: приём ссылкой (Drive/Яндекс.Диск) или локальная папка на сервере.
-- Диаризация («кто говорит») — v2 (pyannote требует HF-токен на сервере).
-- Забор в vault: ИИ-помощник видит `transcripts/` в git при утреннем ритуале,
-  делает саммари + задачи и кладёт разбор в проектную папку vault.
+```python
+from transcriber import TranscriberAgent
+
+agent = TranscriberAgent()          # large-v3, cpu/int8; модель грузится лениво
+t = agent.transcribe("встреча.m4a") # → Transcript
+t.segments                          # [(start, end, text), …]
+t.to_markdown()                     # расшифровка с таймкодами
+t.to_json()                         # для пайплайнов
+```
+
+Ядро не тянет Telegram-зависимостей — в чужой продукт уезжает только
+`transcriber/` + `pip install faster-whisper` (+ ffmpeg в системе).
+
+## Деплой адаптеров на VPS (где Miru — ffmpeg уже есть)
+
+```bash
+cd Task-bot/tools/transcriber
+pip install faster-whisper pyTelegramBotAPI
+
+# Telegram-бот (новый токен у @BotFather! старый скомпрометирован)
+BOT_TOKEN=xxx ALLOWED_USER_ID=291136301 GIT_PUSH=1 \
+  nohup python3 -m adapters.telegram_bot > tg.log 2>&1 &
+
+# Папка для длинных записей (опционально)
+nohup python3 -m adapters.watch_folder > watch.log 2>&1 &
+```
+
+Слабый CPU → `WHISPER_MODEL=medium` (быстрее ×2–3, качество чуть ниже).
+
+## Забор контекста
+Адаптеры кладут .md в `transcripts/` и (при `GIT_PUSH=1`) пушат в git.
+ИИ-помощник при утреннем ритуале видит новые расшифровки → саммари, задачи,
+привязка к проектам → разбор в vault.
+
+## v2 (по команде)
+Диаризация «кто говорит» (pyannote, нужен HF-токен на сервере) · приём ссылок
+на файлы в Telegram · авто-язык.
