@@ -9,18 +9,12 @@
     --serif:Georgia,"Times New Roman",serif;
   }
   @media (prefers-color-scheme: dark){
-    :root{
+    :root:not([data-theme="light"]){
       --bg:#12161B; --card:#1A2027; --ink:#E6EBF0; --muted:#93A1AF;
       --line:#2A333D; --accent:#E08A3C; --accent-soft:#33261A;
       --ok:#5BB37F; --ok-soft:#1C2E23; --warn:#D9A44A; --warn-soft:#332A17;
       --block:#E06456; --block-soft:#39201D;
     }
-  }
-  :root[data-theme="light"]{
-    --bg:#F2F4F6; --card:#FFFFFF; --ink:#212933; --muted:#5C6B7A;
-    --line:#DCE3E9; --accent:#B96417; --accent-soft:#F6E8D8;
-    --ok:#2F7D4F; --ok-soft:#E2F0E7; --warn:#8F6512; --warn-soft:#F7EDD3;
-    --block:#B3392E; --block-soft:#F9E4E1;
   }
   :root[data-theme="dark"]{
     --bg:#12161B; --card:#1A2027; --ink:#E6EBF0; --muted:#93A1AF;
@@ -49,15 +43,23 @@
   .you .act b{font-weight:600;}
   .you .why{color:var(--muted);font-size:13px;}
 
+  .band{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:-12px;}
+  .band h2{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0;font-weight:600;}
+  .band span{color:var(--muted);font-size:12.5px;}
+
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;}
   .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 18px 14px;
     display:flex;flex-direction:column;gap:12px;}
   .card h3{font-family:var(--serif);font-size:18.5px;margin:0;line-height:1.2;}
   .card .head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;}
   .state{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;white-space:nowrap;}
-  .state.on{color:var(--ok);} .state.hold{color:var(--muted);}
+  .state.on{color:var(--ok);} .state.hold{color:var(--muted);} .state.off{color:var(--muted);}
+  .state.hot{color:var(--block);}
+  .card.paused{opacity:.62;}
   .stop{font-size:13.5px;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:10px;margin:0;}
   .stop b{color:var(--ink);font-weight:600;}
+  .stop code{font-family:var(--mono);font-size:12px;}
 
   .tasks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px;}
   .tasks li{display:flex;gap:9px;align-items:baseline;font-size:14px;}
@@ -79,173 +81,155 @@
   <header>
     <div class="eyebrow">ИИ-помощник управленца · сводка</div>
     <h1>Задачи по проектам</h1>
-    <div class="sub"><span class="date">вс · 23 августа 2026</span> &nbsp;·&nbsp; статусы собраны автоматически · обновляется каждое утро в <b>08:00 МСК</b></div>
+    <div class="sub"><span class="date">вс · 6 сентября 2026</span> &nbsp;·&nbsp; статусы собраны автоматически · обновляется каждое утро в <b>08:00 МСК</b></div>
   </header>
 
   <section class="you">
-    <h2>Ждут только тебя — 7</h2>
+    <h2>Ждут только тебя — 6</h2>
     <ul>
-      <li><span class="proj">💰 финансы</span><span class="act"><b>Цели зафиксированы: 500 тыс. до 10.09 · 700 тыс./мес · до НГ ≈ 3,1 млн.</b> <span class="why">Осталось от тебя: остаток/расходы + 3 тёплых клиента на август</span></span></li>
-      <li><span class="proj">miru ⏰</span><span class="act"><b>Домен miru.day — срок верификации истёк или истекает сегодня</b> <span class="why">— проверить первым делом; юрконтур под ЮKassa уже закрыт</span></span></li>
-      <li><span class="proj">🗓 15 дней</span><span class="act"><b>Менторская группа: определить цену, состав, формат</b> <span class="why">— старт 07.09, набор шестерых требует времени; это единственный источник выручки с датой до 10.09</span></span></li>
-      <li><span class="proj">арены рф</span><span class="act"><b>Выбрать цели + «го» на первые касания</b> <span class="why">— готовы досье 7 ЛПР с тактиками и 10 новых таргетов с конференций</span></span></li>
-      <li><span class="proj">новая экономика</span><span class="act"><b>Выгрузить зип карточек онтологии</b> на Диск <span class="why">— правки трёх слоёв копятся мимо канона</span></span></li>
-      <li><span class="proj">контент-завод</span><span class="act"><b>Сменить токен бота у @BotFather</b> <span class="why">— токен открыт в файлах на Диске</span></span></li>
-      <li><span class="proj">miru</span><span class="act"><b>Армянская ID-карта с чипом — есть?</b> <span class="why">— развилка юрсхемы: «онлайн за минуты» или «доверенность $600»</span></span></li>
+      <li><span class="proj">🔴 завтра</span><span class="act"><b>Менторская шестёрка стартует 07.09 — набора нет</b> <span class="why">— анкета живёт с 28.08, в ответах одна строка, и та твоя тестовая («fdf») от 28.08. Реальных заявок 0. Решение: перенести старт или запускать меньшим составом</span></span></li>
+      <li><span class="proj">💰 4 дня</span><span class="act"><b>500 тыс. до 10.09 — денежных касаний нет</b> <span class="why">— шестёрка была единственным источником выручки с датой, и она без набора</span></span></li>
+      <li><span class="proj">ии-интегратор</span><span class="act"><b>Кто эти «разные команды»?</b> <span class="why">— назови имена и стадию, иначе воронку по треку я не веду</span></span></li>
+      <li><span class="proj">synthesis</span><span class="act"><b>Пилот БАС: 9 компаний, term sheet и план 12 недель готовы</b> <span class="why">— нужен твой выход на ИНТЦ «Ломоносов» и рассылка опросника по связкам R ≥ 0,45</span></span></li>
+      <li><span class="proj">контент-завод</span><span class="act"><b>Сменить токен бота у @BotFather</b> <span class="why">— висит с 07.08, токен открыт в файлах на Диске</span></span></li>
+      <li><span class="proj">транскрибер</span><span class="act"><b>Выкатить на VPS или закрыть тему</b> <span class="why">— папки inbox/done созданы 27.08 и пусты, репо не выкачен с 13.08; на нём стоит цепочка по онтологии</span></span></li>
     </ul>
   </section>
 
+  <div class="band"><h2>Два оставленных трека</h2><span>решение от 23.08 — всё прочее на паузе или фоном</span></div>
+
   <section class="grid">
     <article class="card">
-      <div class="head"><h3>Новая экономика</h3><span class="state on">активен</span></div>
-      <p class="stop">Верифицированы <b>3 слоя из 7</b> (5, 3, 2). Слой 2: 4 подтв · 3 скорр · 0 опроверг; <b>Innosight выбит из опор</b>, IMF-доля-труда ограничена до США; «ИИ-агент» как НОВОЕ подтверждён</p>
+      <div class="head"><h3>Креативные команды · менторская шестёрка</h3><span class="state hot">старт завтра</span></div>
+      <p class="stop">Самый живой трек. С 23.08: <b>10 исследований</b>, финмодель, две колоды («Камертон» — рынок+БМ и конкуренты), структура из 8 папок по трекам с дедлайнами на доске Miro. 28.08 поднята <b>анкета-адмиссия</b>, 01.09 — контент-план v4 и тексты рассылки, 05.09 — база «Проблемы управленцев»</p>
+      <ul class="tasks">
+        <li class="done"><span class="chip claude">клод</span>Исследования: рынок, конкуренты, финмодель, БМ, доверие в группе, мировые аналоги</li>
+        <li class="done"><span class="chip me">ты</span>Анкета-адмиссия · контент-план v4 · тексты рассылки · протокол теста спроса</li>
+        <li><span class="chip block">блокер</span>Заявок 0 при старте 07.09<span class="st wait">решение на тебе</span></li>
+        <li><span class="chip me">ты</span>Список 20+ тёплых по 3 сегментам — без него тест спроса не идёт</li>
+        <li><span class="chip claude">клод</span>Скрипт 15-мин созвона · каркас эфира<span class="st wait">ждёт «делай»</span></li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <div class="head"><h3>ИИ-интегратор</h3><span class="state on">активен</span></div>
+      <p class="stop">Рамка целей зафиксирована 11.08: <b>две цели</b> — колода для больших компаний и программа на принципиальных схемах. Ключевой тезис — конфигурируемость через матрицу 5 уровней × 9 слоёв. Папка правилась 31.08; по твоим словам идут разговоры с командами</p>
+      <ul class="tasks">
+        <li class="done"><span class="chip claude">клод</span>Канва + презентация 12 слайдов (PDF+PPTX)</li>
+        <li class="done"><span class="chip me">ты</span>Концепт программы v2 · цели проекта · навигация по папкам</li>
+        <li><span class="chip me">ты</span>Кто в переговорах и на какой стадии<span class="st wait">нужно от тебя</span></li>
+        <li><span class="chip claude">клод</span>Схема перехода между уровнями · диагностика состояния компании<span class="st wait">ждёт «делай»</span></li>
+        <li><span class="chip claude">клод</span>Конкурентный разбор под больших заказчиков<span class="st wait">ждёт «делай»</span></li>
+      </ul>
+    </article>
+  </section>
+
+  <div class="band"><h2>Рядом · идёт фоном</h2><span>не в паузе, но и не в фокусе</span></div>
+
+  <section class="grid">
+    <article class="card">
+      <div class="head"><h3>SYNTHESIS · кооперация резидентов</h3><span class="state on">новый · сильный</span></div>
+      <p class="stop">Ночью 05→06.09 собран тест методики на ИНТЦ «Ломоносов»: <b>80 компаний, 45 сильных связок</b> после веб-проверки (было 69 — девять проверок сняли треть). Инструмент <code>koop_tool v0.1</code> в исходниках, журнал верификации 62 компаний, опросник участника</p>
+      <ul class="tasks">
+        <li class="done"><span class="chip claude">клод</span>Карта связок · слой 4 на кластере БАС · term sheet пилота на 12 недель</li>
+        <li><span class="chip me">ты</span>Выход на ИНТЦ · рассылка опросника по связкам R ≥ 0,45</li>
+        <li><span class="chip claude">клод</span>Заменить теги на коды ОКПД2, подключить ЕИС<span class="st wait">ждёт «делай»</span></li>
+        <li><span class="chip me">ты</span>Разметка связок экспертом кластера — калибровка весов</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <div class="head"><h3>Контент и канал</h3><span class="state on">активен</span></div>
+      <p class="stop">02.09 проведён <b>кастдев «польза канала»</b> — 7 респондентов, ответы сведены в таблицу. Три версии кода бота @neurostrategy без движения с 07.08, <b>секреты в файлах</b></p>
+      <ul class="tasks">
+        <li class="done"><span class="chip me">ты</span>Кастдев на 7 респондентов + сведение ответов</li>
+        <li><span class="chip block">блокер</span>Токен бота открыт на Диске — ротация<span class="st wait">месяц висит</span></li>
+        <li><span class="chip claude">клод</span>Разбор кастдева → позиционирование канала<span class="st wait">ждёт «делай»</span></li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <div class="head"><h3>Новая экономика</h3><span class="state hold">на полке</span></div>
+      <p class="stop">Верифицированы <b>3 слоя из 7</b> (5, 3, 2). Движений с 07.08 нет. Слой 7 «Институты» дважды обрывался по контейнеру</p>
       <ul class="tasks">
         <li class="done"><span class="chip claude">клод</span>Слои 5 «Управление» · 3 «Отношения» · 2 «Субъекты»</li>
-        <li><span class="chip claude">клод</span>Слой 7 «Институты» — 2 обрыва контейнера<span class="st wait">ждёт «делай»</span></li>
-        <li><span class="chip claude">клод</span>Вторая опора для «Труда» (платформенный труд)<span class="st">в очереди</span></li>
-        <li><span class="chip claude">клод</span>Слайды 7–15 под 5 кругов<span class="st wait">ждёт файл</span></li>
+        <li><span class="chip claude">клод</span>Слой 7 «Институты» · вторая опора для «Труда»<span class="st wait">ждёт «делай»</span></li>
         <li><span class="chip me">ты</span>Выгрузить зип карточек канона на Диск</li>
-        <li><span class="chip me">ты</span>Прислать файл презентации «Лаборатория»</li>
       </ul>
     </article>
 
     <article class="card">
-      <div class="head"><h3>Miru · дневник состояния</h3><span class="state on">🚀 в проде</span></div>
-      <p class="stop">14.08: <b>юрконтур закрыт под ЮKassa</b> — реквизиты ИП в оферте, удаление по 152-ФЗ, карта данных; + DDoS-защита, app-design-101, PWA-установка. <b>С 14.08 тишина</b></p>
-      <ul class="tasks">
-        <li class="done"><span class="chip claude">клод</span>Прод · Aurora · монетизация · юрконтур (М1/М2 закрыты, М2 через ИП)</li>
-        <li><span class="chip block">блокер</span>⏰ Домен miru.day — срок истёк или истекает сегодня<span class="st wait">проверить первым</span></li>
-        <li><span class="chip me">ты</span>Х5 почта no-reply · Х2 токен · Х4 пароль · ID-карта</li>
-      </ul>
-    </article>
-
-    <article class="card">
-      <div class="head"><h3>Контент-завод</h3><span class="state on">активен</span></div>
-      <p class="stop">Три версии кода бота @neurostrategy, <b>секреты в файлах</b> — без движения 3-й день</p>
-      <ul class="tasks">
-        <li><span class="chip block">блокер</span>Токен бота открыт на Диске — нужна ротация<span class="st wait">ждёт тебя</span></li>
-        <li><span class="chip claude">клод</span>Один git-репозиторий + ENV-конфиг вместо трёх версий<span class="st">в очереди</span></li>
-        <li><span class="chip me">ты</span>Какая версия сейчас на Railway?</li>
-      </ul>
-    </article>
-
-    <article class="card">
-      <div class="head"><h3>ИИ-помощник (система)</h3><span class="state on">активен</span></div>
-      <p class="stop">Протокол v2 работает: <b>вторая автосводка подряд</b>; в Обсидиане — дашборд и canvas-карта; исходник этого дашборда переехал в git</p>
-      <ul class="tasks">
-        <li><span class="chip claude">клод</span>Выделить агентов по направлениям с разными доступами<span class="st wait">ждёт «делай»</span></li>
-        <li class="done"><span class="chip claude">клод</span>Transcriber запушен: github.com/Griftik/transcriber (2 ГБ, запись в боте)</li>
-        <li><span class="chip me">ты</span>Выкат на VPS: .env (токен, api_id/hash) + docker compose up — README<span class="st run">следующий шаг</span></li>
-        <li class="done"><span class="chip claude">клод</span>Мозг + протокол + утренний ритм 08:00</li>
-        <li class="done"><span class="chip claude">клод</span>Обсидиан-дашборд + canvas-карта</li>
-        <li class="done"><span class="chip claude">клод</span>Автосводки 05.08 и 06.08</li>
-      </ul>
-    </article>
-
-    <article class="card">
-      <div class="head"><h3>Арены РФ · экспертиза</h3><span class="state on">активен · новый</span></div>
-      <p class="stop">Охотничий комплект готов: <b>досье 7 ЛПР</b> (каналы, цитаты, тактики + HR-двери: Федорова, Юркевич, Ельнова) и <b>воронка 25 новых компаний</b> (ТОП-10: М.Видео, Деметра, ГК Дело, Ренессанс…)</p>
+      <div class="head"><h3>Арены РФ · экспертиза</h3><span class="state hold">готово, не запущено</span></div>
+      <p class="stop">Охотничий комплект лежит готовым с 07.08: <b>досье 7 ЛПР</b> (каналы, цитаты, тактики, HR-двери) и <b>воронка 25 компаний</b>. Ни одного касания не сделано — месяц</p>
       <ul class="tasks">
         <li class="done"><span class="chip claude">клод</span>Карта арен → таргет-листы → досье ЛПР + воронка</li>
-        <li><span class="chip me">ты</span>Выбрать цели + «го» на пост-разборы</li>
-        <li><span class="chip claude">клод</span>Черновики разборов (СДЭК «100 дней», ДЛ «−6,8%»)<span class="st wait">после «го»</span></li>
-        <li><span class="chip me">ты</span>Календарь: ПиР сент. · HR-Summit 14–15.10 · TransRussia 19–21.10 · Трансп. неделя нояб.</li>
-      </ul>
-    </article>
-
-    <article class="card">
-      <div class="head"><h3>Помощник управленца · Элина</h3><span class="state on">отдельный проект</span></div>
-      <p class="stop">Папка в Проекты/ создана. План: запись разговора → разбор болей → прототип</p>
-      <ul class="tasks">
-        <li class="done"><span class="chip claude">клод</span>Custdev разобран → бэклог P1–P15; отдельная сессия ведёт продукт</li>
-        <li class="done"><span class="chip claude">клод</span>Продающая колода Элине: 17 слайдов, PDF+PPTX (цена намеренно скрыта)</li>
-        <li><span class="chip claude">клод</span>Анализ рынка → из него цена<span class="st wait">не начат</span></li>
-        <li><span class="chip me">ты</span>Показать колоду Элине · 2-е интервью (модель транзакций)</li>
+        <li><span class="chip me">ты</span>Выбрать цели + «го» на первые касания<span class="st wait">месяц простоя</span></li>
+        <li><span class="chip me">ты</span>Календарь: HR-Summit 14–15.10 · TransRussia 19–21.10</li>
       </ul>
     </article>
 
     <article class="card">
       <div class="head"><h3>Карьера</h3><span class="state hold">задачи записаны</span></div>
-      <p class="stop">Три задачи от 10.08</p>
+      <p class="stop">CV готово с 13.08, рассылка не сделана. 27.08 обновлена <b>База_контактов</b></p>
       <ul class="tasks">
-        <li class="done"><span class="chip me">ты</span>CV готово (+версия для хантеров) · таблица агентств</li>
+        <li class="done"><span class="chip me">ты</span>CV (+версия для хантеров) · таблица агентств</li>
         <li><span class="chip me">ты</span>Разослать CV по агентствам — всё готово</li>
         <li><span class="chip claude">клод</span>Контакты лидеров консалтинга/корпораций<span class="st wait">ждёт «делай»</span></li>
       </ul>
     </article>
 
     <article class="card">
-      <div class="head"><h3>Менторская группа</h3><span class="state on">🗓 старт 07.09</span></div>
-      <p class="stop">«Менторская шестёрка» по логике бордов. <b>16 дней до старта</b> — единственный источник выручки с датой до финцели 10.09. Манифест написан</p>
+      <div class="head"><h3>Группа и онтология управления</h3><span class="state hold">цепочка стоит</span></div>
+      <p class="stop">Цепочка стоит на шаге 1 — <b>транскрибер не выкачен</b>, встреча с Антоном не загружена, значит концепт не дособран и Саше не ушёл</p>
       <ul class="tasks">
-        <li class="done"><span class="chip me">ты</span>Документ + манифест (новая экономика, комьюнити креаторов)</li>
-        <li><span class="chip block">блокер</span>Не определены цена · состав · длительность · оффер<span class="st wait">без них нет набора</span></li>
-        <li><span class="chip claude">клод</span>Оффер, пост для набора, план до 07.09<span class="st wait">ждёт «делай»</span></li>
-      </ul>
-    </article>
-
-    <article class="card">
-      <div class="head"><h3>Creative Community</h3><span class="state on">новый</span></div>
-      <p class="stop">Сообщество вокруг цели «создавать новые продукты» → группы-сборки по методике доводят замысел до продукта. Сначала community, потом группы</p>
-      <ul class="tasks">
-        <li class="done"><span class="chip claude">клод</span>Проект заведён: замысел, порядок, критерии адмиссии</li>
-        <li class="done"><span class="chip me">ты</span>Манифестная рамка задана (из документа менторской группы)</li>
-        <li><span class="chip me">ты</span>Описать методику сборок · сколько community и какого размера</li>
-        <li><span class="chip claude">клод</span>Адмиссия/анкета · инструмент состояния группы · план сбора<span class="st wait">ждёт «делай»</span></li>
-      </ul>
-    </article>
-
-    <article class="card">
-      <div class="head"><h3>Онтология управления · концепт</h3><span class="state on">цепочка задач</span></div>
-      <p class="stop">Материал копится: за вечер +2 твоих дока («Мастер-сборка — операционная модель», «Паспорта девяти слоёв»). Цепочка стоит на шаге 1 — репо transcriber</p>
-      <ul class="tasks">
-        <li><span class="chip me">ты</span>1. Репо transcriber + выкат · 2. Загрузить встречу с Антоном</li>
+        <li><span class="chip me">ты</span>1. Выкатить транскрибер · 2. Загрузить встречу с Антоном</li>
         <li><span class="chip claude">клод</span>3. Дособрать концепт системы управления<span class="st wait">после расшифровки</span></li>
-        <li><span class="chip me">ты</span>4. Отправить Саше на обсуждение</li>
-      </ul>
-    </article>
-
-    <article class="card">
-      <div class="head"><h3>Группа</h3><span class="state hold">задачи записаны</span></div>
-      <p class="stop">Две задачи от 10.08, ждут «делай»</p>
-      <ul class="tasks">
-        <li><span class="chip me">ты</span>Проговорить с Родионом: блоки системы управления группой</li>
-        <li><span class="chip claude">клод</span>Описать проекты группы с ответственными и сроками<span class="st wait">ждёт «делай»</span></li>
-        <li><span class="chip claude">клод</span>Описать манифест и группу<span class="st wait">ждёт «делай»</span></li>
-      </ul>
-    </article>
-
-    <article class="card">
-      <div class="head"><h3>ИИ через образование</h3><span class="state on">активен · приоритет</span></div>
-      <p class="stop">Канва презентации готова (факты, конкуренты, 12 слайдов); от тебя пришёл «Концепт программы v2» (модули × контуры, уровни зрелости, ГОСТ 42001)</p>
-      <ul class="tasks">
-        <li class="done"><span class="chip claude">клод</span>Канва: цифры боли/выгоды + конкуренты с ценами</li>
-        <li class="done"><span class="chip me">ты</span>Концепт программы v2 (AIWG 2–6)</li>
-        <li class="done"><span class="chip claude">клод</span>Презентация собрана: 12 слайдов, PDF+PPTX в чате и в git</li>
-        <li><span class="chip me">ты</span>Вставить именованные кейсы (сл. 9) и цены DT-Team (сл. 11)</li>
-      </ul>
-    </article>
-
-    <article class="card">
-      <div class="head"><h3>Идентичность</h3><span class="state hold">пауза</span></div>
-      <p class="stop">Материал в «Личное» (ценности, достижения, рефлексии). Приватная дорожка — подключаю по твоему слову</p>
-      <ul class="tasks">
-        <li><span class="chip me">ты</span>Скажи, когда и в каком формате заходить (рефлексия? разбор раз в неделю?)</li>
+        <li><span class="chip me">ты</span>Проговорить с Родионом блоки системы управления группой</li>
+        <li><span class="chip claude">клод</span>Проекты группы с ответственными · манифест<span class="st wait">ждёт «делай»</span></li>
       </ul>
     </article>
 
     <article class="card">
       <div class="head"><h3>Личное и покупки</h3><span class="state on">активен</span></div>
-      <p class="stop">Новая задача 09.08: <b>установить ЭЦП на компьютер</b></p>
+      <p class="stop">27.08 собрана <b>база фильмов</b> под киновечера — задача сдвинулась сама</p>
       <ul class="tasks">
-        <li><span class="chip me">ты</span>С утра сходить в храм<span class="st">завтра</span></li>
-        <li><span class="chip me">ты</span>Кинопоказ: день с кинокритиком → тема → закрытый показ</li>
+        <li class="done"><span class="chip me">ты</span>Киновечера: база фильмов собрана</li>
+        <li><span class="chip me">ты</span>Кинопоказ: договориться с кинокритиком → тема → показ</li>
         <li><span class="chip me">ты</span>Установить ЭЦП<span class="st wait">какая ЭЦП? для чего?</span></li>
-        <li><span class="chip claude">клод</span>Пошаговая инструкция под твой вариант<span class="st wait">после уточнения</span></li>
         <li><span class="chip me">ты</span>Ноутбук — купить/забрать? · Билеты — куда, даты?</li>
       </ul>
     </article>
   </section>
 
-  <footer>Источник правды — vault <code>Рабочая зона (Claude)</code> · снимки в <code>Статусы/</code> · протокол: <code>_Протокол Джарвиса v2</code> · исходник: <code>Task-bot/dashboard/</code></footer>
+  <div class="band"><h2>На паузе</h2><span>по твоему решению — «пока там энергии и как будто денег»</span></div>
+
+  <section class="grid">
+    <article class="card paused">
+      <div class="head"><h3>Miru · дневник состояния</h3><span class="state off">⏸ пауза</span></div>
+      <p class="stop">Остановлен в проде, юрконтур под ЮKassa закрыт. <b>Тишина с 14.08 — 23 дня</b>: пауза только зафиксировала факт</p>
+      <ul class="tasks">
+        <li class="done"><span class="chip claude">клод</span>Прод · Aurora · монетизация · юрконтур (М1/М2 закрыты)</li>
+        <li><span class="chip me">ты</span>Отложено: домен miru.day (верификация просрочена ~21.08), почта no-reply, ID-карта</li>
+      </ul>
+    </article>
+
+    <article class="card paused">
+      <div class="head"><h3>Помощник управленца · Элина</h3><span class="state off">⏸ пауза</span></div>
+      <p class="stop">Он же «ИИ роботизация управления». Кастдев разобран в бэклог P1–P15, колода 17 слайдов готова. <b>Тишина с 13.08 — 24 дня</b></p>
+      <ul class="tasks">
+        <li class="done"><span class="chip claude">клод</span>Custdev → бэклог P1–P15 · продающая колода 17 слайдов</li>
+        <li><span class="chip me">ты</span>Отложено: показ колоды, 2-е интервью, анализ рынка, прототип ядра</li>
+      </ul>
+    </article>
+
+    <article class="card paused">
+      <div class="head"><h3>Идентичность</h3><span class="state off">⏸ пауза</span></div>
+      <p class="stop">Приватная дорожка. Материал в «Личное» — подключаю по твоему слову</p>
+      <ul class="tasks">
+        <li><span class="chip me">ты</span>Скажи, когда и в каком формате заходить</li>
+      </ul>
+    </article>
+  </section>
+
+  <footer>Источник правды — vault <code>Рабочая зона (Claude)</code> · снимки в <code>Статусы/</code> · протокол: <code>_Протокол Джарвиса v3</code> · исходник: <code>Task-bot/dashboard/</code></footer>
 </div>
