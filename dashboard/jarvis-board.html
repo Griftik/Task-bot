@@ -75,7 +75,7 @@
   .chip.block{background:var(--block-soft);color:var(--block);}
   .id{font-family:var(--mono);font-size:11px;color:var(--muted);flex-shrink:0;}
   .st{font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap;}
-  .st.run{color:var(--ok);} .st.wait{color:var(--warn);}
+  .st.run{color:var(--ok);} .st.wait{color:var(--warn);} .st.late{color:var(--block);}
   li.done{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line);}
 
   .paused-list{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 18px;font-size:13.5px;color:var(--muted);line-height:1.7;}
@@ -90,25 +90,26 @@
   <header>
     <div class="eyebrow">ИИ-помощник управленца · сводка</div>
     <h1>Задачи по проектам</h1>
-    <div class="sub"><span class="date">вт · 15 сентября 2026</span> &nbsp;·&nbsp; портфель v2 — четыре трека · трекер: <code>_ТРЕКЕР.md</code> · вход: <code>_ВХОДЯЩИЕ/</code> · обновляется в <b>08:00 МСК</b></div>
+    <div class="sub"><span class="date">чт · 17 сентября 2026</span> &nbsp;·&nbsp; портфель v2 — четыре трека · трекер: <code>_ТРЕКЕР.md</code> · вход: <code>_ВХОДЯЩИЕ/</code> · обновляется в <b>08:00 МСК</b> · сводка 16.09 не выходила</div>
   </header>
 
   <section class="goal">
     <div><b>0 / 24</b><span>мест Сборки продано · порог экономики — 16</span></div>
-    <div><b>15 дней</b><span>до 30.09 — конец цены 350 тыс.; далее 400 → 450</span></div>
-    <div><b>25 дней</b><span>до 10.10 — закрытие приёма заявок</span></div>
-    <div><b>36 дней</b><span>до 21.10 — онлайн-установка; очные дни 25–27.10; итог 02.11</span></div>
-    <div><b>7 дней</b><span>до 22.09 — Этап 0 сайта; конгресс PE 24.09 (подтвердить)</span></div>
+    <div><b>13 дней</b><span>до 30.09 — конец цены 350 тыс.; с 1.10 — 400 (ступень 450 убрана)</span></div>
+    <div><b>28 дней</b><span>до 15.10 — закрытие приёма заявок (было 10.10)</span></div>
+    <div><b>37 дней</b><span>до очных дней <b>24–25.10</b>; онлайн 20.10 и 30.10; подбор групп 16–19.10</span></div>
+    <div><b>5 дней</b><span>до 22.09 — Этап 0 сайта; 14.10 — мастер-класс с Коротковым; конгресс 24.09 (подтвердить)</span></div>
   </section>
 
   <section class="you">
-    <h2>Фокус дня · вт 15.09 — три задачи на тебе</h2>
+    <h2>Фокус дня · чт 17.09 — три задачи на тебе</h2>
     <ul>
-      <li><span class="proj">A1 · 2-й день</span><span class="act"><b>Транскрибер: секреты в GitHub → Run workflow</b> <span class="why">— 30 минут; 33 дня без выката; на нём стоит контур CRM, разбор встреч и CRM-агент</span></span></li>
-      <li><span class="proj">S12 · жду отчёт</span><span class="act"><b>10 интервью по шорт-листу — кому написал?</b> <span class="why">— в календаре встреч с кандидатами нет; на каждый ответ — «назначь встречу с …», ставлю в календарь и CRM</span></span></li>
-      <li><span class="proj">A8 · 2 минуты</span><span class="act"><b>Создать приватный репо Griftik/crm-agent</b> <span class="why">— код агента готов, лежит в резервной ветке transcriber; интеграция репозитории создавать не может</span></span></li>
-      <li><span class="proj">следом</span><span class="act"><span class="why">P1 — продукты и цены для кастдева · B11 — выбор H1 сайта: A / B / C · P4 — новая финцель · B8, B10 — срок сегодня</span></span></li>
-      <li><span class="proj">закрыто вчера</span><span class="act"><span class="why">S1 лендинг Сборки — v23: форма заявки, Telegram, цена, даты (другая сессия) · A6 CRM-агент v0.1 собран, 17 тестов</span></span></li>
+      <li><span class="proj">S12 · 3-й день</span><span class="act"><b>10 интервью по шорт-листу — кому написал, кто ответил?</b> <span class="why">— в календаре встреч с кандидатами нет; 18.09 стоят Семён и Виталий — в шорт-листе таких нет; на каждый ответ — «назначь встречу с …»</span></span></li>
+      <li><span class="proj">S7 · лендинг v28</span><span class="act"><b>Опубликовать Сборку в Tilda через Claude in Chrome</b> <span class="why">— из песочницы упёрлось в reCAPTCHA; пакет и «ЗАДАНИЕ» — в папке Сборки на Диске; потом данные оператора в политике и домен sborka.life</span></span></li>
+      <li><span class="proj">P5 · новый лид</span><span class="act"><b>Иннополис — стратсессия кластера КИ: кто заказчик, отправлено ли, дата, цена</b> <span class="why">— три документа от 15.09 разложены в Проекты/Иннополис; в них нет заказчика, даты и цены</span></span></li>
+      <li><span class="proj">следом</span><span class="act"><span class="why">M2 — документ Анатолию, срок сегодня · A1 — транскрибер, 4-й день, 35 дней без выката · A8 — репо crm-agent, 3-й день · B13 — пост Серёжи на согласовании</span></span></li>
+      <li><span class="proj">просрочено</span><span class="act"><span class="why">с 16.09: S2 вторая волна · S13 Excel Патриотов · P1 продукты и цены · P4 финцель · B11 выбор H1 &nbsp;·&nbsp; с 15.09: B8 дубль чата · B10 конгресс 24.09</span></span></li>
+      <li><span class="proj">сдвинулось 15–16.09</span><span class="act"><span class="why">Сборка: лендинг v28 — новая структура, даты 24–25.10, цена 350 → 400, og-превью, аналитика (другая сессия) · бриф личного сайта v1.6 · три документа по стратсессии Иннополиса</span></span></li>
     </ul>
   </section>
 
@@ -117,47 +118,51 @@
   <section class="grid">
     <article class="card">
       <div class="head"><h3>Сборка (SYNTHESIS)</h3><span class="state hot">главный трек</span></div>
-      <p class="stop">Продать <b>24 места</b> по 350–450 тыс. до 10.10. 14.09 — лендинг <b>v23</b>: форма заявки из 4 полей, манифест, программа 21.10 · 25–27.10 · 02.11, условия оплаты и возврата, политика 152-ФЗ. Шорт-лист: 8 тёплых выше порога + 13 холодных. <b>Продано 0, интервью в календаре 0</b></p>
+      <p class="stop">Продать <b>24 места</b>: 350 тыс. до 30.09, далее 400; заявки до 15.10. 16.09 — лендинг <b>v28</b>: структура по ревью коллеги, «После Сборки» (новое обещание — закрытая среда и сопровождение проектов), два очных дня <b>24–25.10</b>, онлайн 20 и 30.10, почта dt-team@yandex.ru, домен sborka.life, PDF v28, тексты для рассылки в Telegram. <b>Продано 0, интервью в календаре 0</b></p>
       <ul class="tasks">
-        <li class="done"><span class="id">S1</span><span class="chip me">ты</span>Лендинг: ссылка, Telegram, цена, даты · <span class="id">S3</span> шорт-лист 31 кандидат</li>
-        <li><span class="id">S12</span><span class="chip me">ты</span>10 интервью по шорт-листу<span class="st wait">жду отчёт</span></li>
+        <li class="done"><span class="id">S1</span><span class="chip me">ты</span>Лендинг: ссылка, Telegram, цена, даты · <span class="id">S3</span> шорт-лист 31 кандидат · <span class="id">S15</span> тексты для рассылки</li>
+        <li><span class="id">S12</span><span class="chip me">ты</span>10 интервью по шорт-листу<span class="st wait">жду отчёт · 3-й день</span></li>
+        <li><span class="id">S7</span><span class="chip me">ты</span>Публикация в Tilda (Claude in Chrome по «ЗАДАНИЮ») + данные оператора + домен sborka.life<span class="st wait">пакет готов</span></li>
+        <li><span class="id">S2</span><span class="chip me">ты</span>Вторая волна кандидатов · <span class="id">S13</span> Excel Патриотов → _ВХОДЯЩИЕ<span class="st late">срок 16.09</span></li>
+        <li><span class="id">S14</span><span class="chip me">ты</span>«После Сборки» — кто ведёт закрытую среду и сопровождение, на каких условиях<span class="st wait">30.09</span></li>
         <li><span class="id">S4</span><span class="chip claude">клод</span>Скрипт 30-мин разговора + диагностика и карта ресурсов<span class="st wait">ждёт «делай»</span></li>
-        <li><span class="id">S7</span><span class="chip me">ты</span>Опубликовать на домене + данные оператора в политике (ИП/ООО, ИНН, адрес) · <span class="id">S8</span> домен для Камертона</li>
-        <li><span class="id">S5</span><span class="chip me">ты</span>Семь развилок экономики — до 30.09 · <span class="id">S6</span> партнёры в зачёт — к 23.09</li>
-        <li><span class="id">S9</span><span class="chip claude">клод</span>Даты Сборки в календарь · <span class="id">S11</span> тезисы для Серёжи и Полины<span class="st wait">ждёт «делай»</span></li>
+        <li><span class="id">S5</span><span class="chip me">ты</span>Семь развилок экономики — до 30.09 · <span class="id">S6</span> партнёры в зачёт — к 23.09 · <span class="id">S10</span> эксперты — к 30.09</li>
+        <li><span class="id">S9</span><span class="chip claude">клод</span>Новые даты цикла в календарь · <span class="id">S11</span> тезисы для Серёжи и Полины по v28<span class="st wait">ждёт «делай»</span></li>
       </ul>
     </article>
 
     <article class="card">
       <div class="head"><h3>Личный бренд и лендинг</h3><span class="state on">активен</span></div>
-      <p class="stop">13.09 — бриф <b>v1.5</b>: позиционирование пересобрано по документу Серёжи + твоим правкам — «следующий масштаб, вместе в реализацию», бизнес-архитектор; три продукта; фонды — второстепенный маршрут; антикризис убран, «консалтинг» под запретом; живые скриншоты сняты. Этап 0 сайта — к 22.09</p>
+      <p class="stop">15.09 — бриф <b>v1.6</b>: фонды убраны совсем, четыре продукта разведены с dt-team.ru, менторинг только для собственников и CEO, дескриптор «Предприниматель · Инвестор · Ментор · Спикер», слоган, референсы Борисов и Хартманн, сайт «лёгкий от слов». Этап 0 сайта — к 22.09. У Серёжи 15–16.09 — правки позиционирования, контент-планера, профиля спикера</p>
       <ul class="tasks">
         <li class="done"><span class="id">B1</span><span class="chip me">ты</span>Позиционирование Серёжи · <span class="id">B2</span> фонды · <span class="id">B4</span> скриншоты · <span class="id">B7</span> сведение формул</li>
-        <li><span class="id">B11</span><span class="chip me">ты</span>Выбрать H1: A «по стратегии, а не через хаос» / B «Проектирую следующий масштаб бизнеса» / C «Когда бизнесу тесно»<span class="st wait">16.09</span></li>
-        <li><span class="id">B3</span><span class="chip me">ты</span>Этап 0 сайта на Tilda: hero из v1.5, цифры, PDF-профиль, Telegram<span class="st wait">22.09</span></li>
-        <li><span class="id">B5</span><span class="chip me">ты</span>Материалы §10 брифа: цифры, 3–4 кейса, отзывы, логотипы, фото<span class="st wait">27.09</span></li>
-        <li><span class="id">B6</span><span class="chip me">ты</span>Договорённость с Анной: объём, сроки, копирайтер<span class="st wait">18.09</span></li>
-        <li><span class="id">B12</span><span class="chip claude">клод</span>Согласовать positioning.md канала с «масштабом» + PDF-профиль для /funds<span class="st wait">ждёт «делай»</span></li>
-        <li><span class="id">B8</span><span class="chip me">ты</span>Чат «Контент для Жени» → дубль в _ВХОДЯЩИЕ · <span class="id">B9</span> токен бота · <span class="id">B10</span> конгресс 24.09</li>
+        <li><span class="id">B11</span><span class="chip me">ты</span>H1: подтвердить вариант 1 из v1.6 — «Когда бизнесу тесно в текущей модели» + «Проектирую следующий масштаб бизнеса»<span class="st late">срок 16.09</span></li>
+        <li><span class="id">B13</span><span class="chip me">ты</span>Согласовать пост Серёжи «Кто такой руководитель в мире, где AI уже умеет управлять?» (SYNTHESIS)<span class="st wait">сегодня</span></li>
+        <li><span class="id">B3</span><span class="chip me">ты</span>Этап 0 сайта на Tilda: hero по v1.6, цифры, три продукта, «Спикер» с PDF<span class="st wait">22.09</span></li>
+        <li><span class="id">B6</span><span class="chip me">ты</span>Договорённость с Анной: объём, сроки, копирайтер<span class="st wait">18.09</span> · <span class="id">B5</span> материалы §10<span class="st wait">27.09</span></li>
+        <li><span class="id">B12</span><span class="chip claude">клод</span>Согласовать positioning.md канала с «масштабом» и дескриптором (PDF для фондов снят)<span class="st wait">ждёт «делай»</span></li>
+        <li><span class="id">B8</span><span class="chip me">ты</span>Чат «Контент для Жени» → дубль в _ВХОДЯЩИЕ · <span class="id">B10</span> конгресс 24.09 — формат<span class="st late">срок 15.09</span> · <span class="id">B9</span> токен бота</li>
       </ul>
     </article>
 
     <article class="card">
       <div class="head"><h3>Продажи через кастдев</h3><span class="state on">деньги сейчас</span></div>
-      <p class="stop">Финцель 500 тыс./10.09 сорвана, новая не назначена. В руках: <b>≈60 лидов</b> февраля–марта (3 согласились, 4 думают, 8 после встречи), 88 карточек CRM, 123 предпринимателя с выручкой в «Социальном капитале»</p>
+      <p class="stop">Финцель 500 тыс./10.09 сорвана, новая не назначена. <b>Новый лид 15.09 — Иннополис:</b> стратсессия по концепции кластера креативных индустрий (АДЦ «Бумеранг», 19,5 тыс. м², резидентов нет), один день, 20–24 участника, ты — ведущий-методолог. Документы для заказчика и внутренний дизайн v0.2 готовы. В руках также ≈60 лидов февраля–марта и 88 карточек CRM</p>
       <ul class="tasks">
-        <li><span class="id">P2</span><span class="chip claude">клод</span>Реактивационный список + скрипт кастдев-звонка с предложением<span class="st wait">ждёт «делай» + P1</span></li>
-        <li><span class="id">P3</span><span class="chip claude">клод</span>5 карточек знакомств в день из «Социального капитала»<span class="st wait">ждёт «делай»</span></li>
-        <li><span class="id">P4</span><span class="chip me">ты</span>Новая финцель: число и дата<span class="st wait">16.09</span></li>
+        <li><span class="id">P5</span><span class="chip me">ты</span>Иннополис: кто заказчик, отправлено ли описание, дата сессии, цена<span class="st wait">жду отчёт</span></li>
+        <li><span class="id">P6</span><span class="chip me">ты</span>Иннополис: соведущий, четыре модератора, протоколист от DT-Team; даты vs цикл Сборки<span class="st wait">после P5</span></li>
+        <li><span class="id">P1</span><span class="chip me">ты</span>Продукты и цены для кастдева · <span class="id">P4</span> новая финцель: число и дата<span class="st late">срок 16.09</span></li>
+        <li><span class="id">P2</span><span class="chip claude">клод</span>Реактивационный список + скрипт кастдев-звонка<span class="st wait">ждёт «делай» + P1</span> · <span class="id">P3</span> 5 карточек в день<span class="st wait">ждёт «делай»</span></li>
       </ul>
     </article>
 
     <article class="card">
       <div class="head"><h3>Автоматизация</h3><span class="state on">транскрибер → CRM → календарь</span></div>
-      <p class="stop">Замысел: встреча → запись Zoom → расшифровка → контекст в проект + память по человеку в CRM. 14.09 собран <b>CRM-агент v0.1</b>: Telegram-переписка → Claude → «База_контактов», отчёт в «Избранное», 17 тестов; код в резервной ветке <code>transcriber:crm-agent-v0.1</code>. Транскрибер не выкачен 33 дня</p>
+      <p class="stop">Замысел: встреча → запись Zoom → расшифровка → контекст в проект + память по человеку в CRM. CRM-агент v0.1 собран 14.09 (17 тестов), код в резервной ветке <code>transcriber:crm-agent-v0.1</code>. <b>Транскрибер не выкачен 35 дней</b>: в Actions два упавших запуска от 13.08, ручной Run workflow не запускался. Движения за 15–16.09 нет</p>
       <ul class="tasks">
         <li class="done"><span class="id">A6</span><span class="chip claude">клод</span>CRM-агент v0.1: код, тесты, docs, CI</li>
-        <li><span class="id">A8</span><span class="chip me">ты</span>Приватный репо crm-agent → пуш · <span class="id">A9</span> креды: ключ Claude, service account + доступ к таблице</li>
+        <li><span class="id">A1</span><span class="chip me">ты</span>Транскрибер: секреты в GitHub → Run workflow<span class="st late">4-й день</span></li>
+        <li><span class="id">A8</span><span class="chip me">ты</span>Приватный репо crm-agent → пуш<span class="st late">3-й день</span> · <span class="id">A9</span> креды: ключ Claude, service account + доступ к таблице</li>
         <li><span class="id">A10</span><span class="chip me">ты</span>Первый запуск: login → check → sync --dry-run<span class="st wait">после A1, A9</span></li>
         <li><span class="id">A2</span><span class="chip claude">клод</span>Расшифровка → выжимка + CRM<span class="st run">ручной режим из _ВХОДЯЩИЕ</span></li>
         <li><span class="id">A3</span><span class="chip claude">клод</span>Одна CRM из трёх таблиц + Excel Патриотов<span class="st wait">ждёт «делай» + Excel</span></li>
@@ -165,6 +170,12 @@
       </ul>
     </article>
   </section>
+
+  <div class="band"><h2>Мастер-класс для Патриотов · 14.10</h2><span>с Анатолием Коротковым · через 27 дней · время и площадка не подтверждены</span></div>
+  <div class="paused-list">
+    <b>M1</b> моя часть — сделано (Google Doc) · <b>M2</b> отправить Анатолию и согласовать тайминг 2-й части — <b>срок сегодня</b> ·
+    <b>M3</b> время и площадка, кто отвечает за набор и анонс — 20.09 · <b>M4</b> анонс Патриотам через Серёжу — после M2 · <b>M5</b> участники → CRM и Сборка — после M3
+  </div>
 
   <div class="band"><h2>На паузе</h2><span>по решению 23.08 или не названы 13.09 — не трогаю, не напоминаю</span></div>
 
@@ -176,7 +187,7 @@
   </div>
 
   <div class="band"><h2>Личное</h2><span>чтобы не терялось</span></div>
-  <div class="paused-list">ЭЦП — какая и зачем · кинопоказ: база фильмов собрана, договориться с кинокритиком · ноутбук · билеты</div>
+  <div class="paused-list">ЭЦП — какая и зачем · кинопоказ: база фильмов собрана, договориться с кинокритиком · ноутбук · билеты · 17.09 19:00 лекция «Как смотреть на современное искусство» · 19.09 дача</div>
 
   <footer>Источник правды — vault <code>Рабочая зона (Claude)</code> · карта: <code>_КАРТА ПРОЕКТОВ v2</code> · трекер: <code>_ТРЕКЕР.md</code> · протокол: <code>_Протокол v4</code> · исходник: <code>Task-bot/dashboard/</code></footer>
 </div>
