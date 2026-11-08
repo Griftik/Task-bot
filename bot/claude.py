@@ -73,18 +73,7 @@ class ClaudeAssistant:
             f"({now_local.tzname()}).\n\nUser message:\n{text}"
         )
         try:
-            message = await self._client.messages.create(
-                model=self._model,
-                max_tokens=2048,
-                system=EXTRACT_SYSTEM,
-                thinking={"type": "disabled"},
-                output_config={
-                    "effort": "low",
-                    "format": {"type": "json_schema", "schema": EXTRACT_SCHEMA},
-                },
-                messages=[{"role": "user", "content": prompt}],
-            )
-            data = json.loads(_text_of(message))
+            data = json.loads(await self._extract_json(prompt))
             drafts = [self._draft_from(item) for item in data.get("tasks", [])]
             drafts = [d for d in drafts if d is not None]
         except Exception:  # noqa: BLE001 - resilience is the whole point here
@@ -102,6 +91,20 @@ class ClaudeAssistant:
                 )
             ]
         return drafts
+
+    async def _extract_json(self, prompt: str) -> str:
+        """Ask the model for EXTRACT_SCHEMA-shaped JSON; return the raw text."""
+        message = await self._client.messages.create(
+            model=self._model,
+            max_tokens=2048,
+            system=EXTRACT_SYSTEM,
+            output_config={
+                "effort": "low",
+                "format": {"type": "json_schema", "schema": EXTRACT_SCHEMA},
+            },
+            messages=[{"role": "user", "content": prompt}],
+        )
+        return _text_of(message)
 
     @staticmethod
     def _draft_from(item: dict) -> TaskDraft | None:

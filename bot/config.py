@@ -15,7 +15,9 @@ except ImportError:  # pragma: no cover - dotenv is listed in requirements.txt
     pass
 
 
-DEFAULT_MODEL = "claude-opus-5"
+DEFAULT_MODEL = "claude-opus-5-5"
+# OpenRouter routes to the same Claude model under its own slug.
+DEFAULT_OPENROUTER_MODEL = "anthropic/claude-opus-5.5"
 
 
 class ConfigError(RuntimeError):
@@ -57,6 +59,9 @@ def _parse_daily_brief(raw: str) -> tuple[int, int] | None:
 class Config:
     telegram_token: str
     anthropic_model: str = DEFAULT_MODEL
+    # "anthropic" (direct API) or "openrouter".
+    provider: str = "anthropic"
+    openrouter_model: str = DEFAULT_OPENROUTER_MODEL
     db_path: str = "taskbot.db"
     timezone_name: str = "UTC"
     allowed_chat_ids: frozenset[int] = field(default_factory=frozenset)
@@ -65,6 +70,11 @@ class Config:
     @property
     def tzinfo(self) -> ZoneInfo:
         return ZoneInfo(self.timezone_name)
+
+    @property
+    def model(self) -> str:
+        """The model id for the active provider."""
+        return self.openrouter_model if self.provider == "openrouter" else self.anthropic_model
 
     def is_allowed(self, chat_id: int) -> bool:
         """True if the chat may use the bot. An empty allow-list means open."""
@@ -79,12 +89,16 @@ class Config:
                 "put its token in your environment or .env file."
             )
 
-        # The Anthropic SDK resolves ANTHROPIC_API_KEY on its own, but we fail
-        # early here with a friendly message instead of at the first API call.
-        if not os.environ.get("ANTHROPIC_API_KEY", "").strip():
+        # Either key works; OpenRouter wins if both are set. Fail early with a
+        # friendly message instead of at the first API call.
+        if os.environ.get("OPENROUTER_API_KEY", "").strip():
+            provider = "openrouter"
+        elif os.environ.get("ANTHROPIC_API_KEY", "").strip():
+            provider = "anthropic"
+        else:
             raise ConfigError(
-                "ANTHROPIC_API_KEY is not set. Get one at "
-                "https://console.anthropic.com/settings/keys"
+                "Neither OPENROUTER_API_KEY nor ANTHROPIC_API_KEY is set. Put one "
+                "of them in your environment or .env file."
             )
 
         timezone_name = os.environ.get("TASKBOT_TIMEZONE", "UTC").strip() or "UTC"
@@ -99,6 +113,9 @@ class Config:
             telegram_token=token,
             anthropic_model=os.environ.get("ANTHROPIC_MODEL", "").strip()
             or DEFAULT_MODEL,
+            provider=provider,
+            openrouter_model=os.environ.get("OPENROUTER_MODEL", "").strip()
+            or DEFAULT_OPENROUTER_MODEL,
             db_path=os.environ.get("TASKBOT_DB_PATH", "").strip() or "taskbot.db",
             timezone_name=timezone_name,
             allowed_chat_ids=_parse_allowed_ids(

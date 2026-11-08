@@ -41,10 +41,18 @@ Claude, а про остальное вовремя получать напом�
 
 Напиши [@BotFather](https://t.me/BotFather) → `/newbot` → получи **токен**.
 
-### 2. Получи ключ Anthropic
+### 2. Получи ключ: OpenRouter или Anthropic
 
-На [console.anthropic.com](https://console.anthropic.com/settings/keys) создай
-API-ключ.
+Подойдёт любой из двух:
+
+- **OpenRouter** — ключ на [openrouter.ai/settings/keys](https://openrouter.ai/settings/keys),
+  в `.env` — `OPENROUTER_API_KEY` (модель — `OPENROUTER_MODEL`, по умолчанию
+  `anthropic/claude-opus-5.5`);
+- **Anthropic** — ключ на [console.anthropic.com](https://console.anthropic.com/settings/keys),
+  в `.env` — `ANTHROPIC_API_KEY`.
+
+Если заданы оба, бот работает через OpenRouter. Ключ кладётся только в `.env`
+на сервере или в секреты GitHub — никогда в чат и не в репозиторий.
 
 ### 3. Настрой и запусти
 

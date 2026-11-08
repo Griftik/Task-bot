@@ -16,6 +16,7 @@ from telegram.ext import (
 
 from . import handlers
 from .claude import ClaudeAssistant
+from .openrouter import OpenRouterAssistant
 from .config import Config, ConfigError
 from .db import Database
 from .scheduler import schedule_startup
@@ -48,7 +49,13 @@ async def _post_init(application: Application) -> None:
             "TASKBOT_ALLOWED_CHAT_IDS is empty — the bot will reply to anyone. "
             "Set it to your chat id (send /whoami) to keep the bot private."
         )
-    logger.info("Task-bot is up. Model: %s", config.anthropic_model)
+    logger.info("Task-bot is up. Provider: %s, model: %s", config.provider, config.model)
+
+
+def _make_assistant(config: Config) -> ClaudeAssistant:
+    if config.provider == "openrouter":
+        return OpenRouterAssistant(config.openrouter_model)
+    return ClaudeAssistant(config.anthropic_model)
 
 
 def build_application(config: Config) -> Application:
@@ -59,7 +66,7 @@ def build_application(config: Config) -> Application:
         {
             "config": config,
             "db": Database(config.db_path),
-            "assistant": ClaudeAssistant(config.anthropic_model),
+            "assistant": _make_assistant(config),
         }
     )
 
